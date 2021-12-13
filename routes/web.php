@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [FilmController::class, 'index']);
+Route::get('/dashboard/create', [FilmController::class, 'create']);
