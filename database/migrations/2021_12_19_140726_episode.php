@@ -15,10 +15,12 @@ class Episode extends Migration
     {
         Schema::create('tbl_episode', function (Blueprint $table) {
             $table->id();
-            $table->string('film_id');
-            $table->string('title');
-            $table->string('film_link');
+            $table->unsignedBigInteger('show_id');
+            $table->string('title_episode');
+            $table->string('link');
             $table->timestamps();
+
+            $table->foreign('show_id')->references('id')->on('tbl_show');
         });
     }
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Film extends Migration
+class Genre extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,9 @@ class Film extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_film', function (Blueprint $table) {
+        Schema::create('tbl_genre', function (Blueprint $table) {
             $table->id();
-            $table->string('slug');
-            $table->string('title')->unique();
-            $table->string('sinopsis');
             $table->string('genre');
-            $table->string('image');
-            $table->integer('score');
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ class Film extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_film');
+        Schema::dropIfExists('tbl_genre');
     }
 }

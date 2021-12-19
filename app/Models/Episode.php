@@ -5,17 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Film extends Model
+class Episode extends Model
 {
     use HasFactory;
-
-    protected $table = 'tbl_film';
+    protected $primarykey = 'id';
+    protected $table = 'tbl_episode';
     protected $fillable = [
-        'slug',
-        'title',
-        'sinopsis',
-        'genre',
-        'image',
-        'score'
+        'show_id',
+        'title_episode',
+        'link'
     ];
 }

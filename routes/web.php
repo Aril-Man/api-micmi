@@ -17,6 +17,3 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/dashboard', [FilmController::class, 'index']);
-Route::get('/dashboard/create', [FilmController::class, 'create']);
