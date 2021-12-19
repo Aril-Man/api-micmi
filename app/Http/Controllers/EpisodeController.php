@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Film;
-use App\Http\Requests\StoreFilmRequest;
-use App\Http\Requests\UpdateFilmRequest;
+use App\Models\Episode;
+use Illuminate\Http\Request;
 
-class FilmController extends Controller
+class EpisodeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class FilmController extends Controller
      */
     public function index()
     {
-        return view('dashboard.index');
+        //
     }
 
     /**
@@ -25,16 +24,16 @@ class FilmController extends Controller
      */
     public function create()
     {
-        return view('dashboard.create');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreFilmRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreFilmRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -42,10 +41,10 @@ class FilmController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Film  $film
+     * @param  \App\Models\Episode  $episode
      * @return \Illuminate\Http\Response
      */
-    public function show(Film $film)
+    public function show(Episode $episode)
     {
         //
     }
@@ -53,10 +52,10 @@ class FilmController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Film  $film
+     * @param  \App\Models\Episode  $episode
      * @return \Illuminate\Http\Response
      */
-    public function edit(Film $film)
+    public function edit(Episode $episode)
     {
         //
     }
@@ -64,11 +63,11 @@ class FilmController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateFilmRequest  $request
-     * @param  \App\Models\Film  $film
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Episode  $episode
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateFilmRequest $request, Film $film)
+    public function update(Request $request, Episode $episode)
     {
         //
     }
@@ -76,10 +75,10 @@ class FilmController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Film  $film
+     * @param  \App\Models\Episode  $episode
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Film $film)
+    public function destroy(Episode $episode)
     {
         //
     }
