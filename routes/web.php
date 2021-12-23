@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\FilmController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,5 +17,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
+
+Route::get('login', [LoginController::class, 'index'])->name('login');
+Route::post('login', [LoginController::class, 'customLogin'])->name('login.custom');
+Route::get('signout', [LoginController::class, 'signOut'])->name('signout');
+
+Route::get('register', [RegisterController::class, 'index'])->name('register-user');
+Route::post('register', [RegisterController::class, 'customRegistration'])->name('register.custom');
+
+Route::get('dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
