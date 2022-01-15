@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\API\ShowController as APIShowController;
 use App\Http\Controllers\FilmController;
+use App\Http\Controllers\ShowController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,4 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::prefix('/dashboard')->group(function () {
+    Route::get('/', [ShowController::class, 'index'])->name('dashbord.index');
+    Route::get('/create', [ShowController::class, 'create_anime'])->name('dashbord.create_anime');
+    Route::post('/create', [ShowController::class, 'store_anime']);
 });

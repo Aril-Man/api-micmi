@@ -64,9 +64,10 @@
             <li class="nav-item">
                 <a href="{{ url('/dashboard/create') }}" class="nav-link">
                     <i class="fas fa-fw fa-book"></i>
-                    <span>Create Film</span>
+                    <span>Create Anime</span>
                 </a>
             </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
