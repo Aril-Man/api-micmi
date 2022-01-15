@@ -18,11 +18,9 @@ class Show extends Migration
             $table->string('title');
             $table->string('slug');
             $table->string('score');
-            $table->unsignedBigInteger('genre_id');
+            $table->string('genre_id');
             $table->string('image');
             $table->timestamps();
-
-            $table->foreign('genre_id')->references('id')->on('tbl_genre');
         });
     }
 

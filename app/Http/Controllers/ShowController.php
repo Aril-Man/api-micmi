@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Show;
 use App\Http\Requests\StoreShowRequest;
 use App\Http\Requests\UpdateShowRequest;
+use App\Models\Genre;
+use Illuminate\Support\Str;
+
 
 class ShowController extends Controller
 {
@@ -13,9 +16,11 @@ class ShowController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        //
+        $data = Show::all();
+        return view('dashboard.index', ['data', $data]);
     }
 
     /**
@@ -23,9 +28,10 @@ class ShowController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create_anime()
     {
-        //
+        $data_genre = Genre::all();
+        return view('dashboard.create')->with('genre', $data_genre);
     }
 
     /**
@@ -34,9 +40,48 @@ class ShowController extends Controller
      * @param  \App\Http\Requests\StoreShowRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreShowRequest $request)
+    public function store_anime(StoreShowRequest $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'score' => 'required',
+            'genre_id' => 'required|array',
+            'image' => 'required|file|image'
+        ]);
+
+        $input = $request->all();
+
+        $input['title'] = $input['title'];
+        $input['slug'] = strtolower($input['title']);
+        $input['score'] = $input['score'];
+
+        $input_genre = $request->input('genre_id');
+        $genre = implode(',', $input_genre);
+
+        $file = $request->file('image');
+        $extension = $file->getClientOriginalExtension();
+        $folderName = 'cover_image/';
+        $destinationPath = public_path() . $folderName;
+        $safeName = Str::random(10) . '.' . $extension;
+        $file->move($destinationPath, $safeName);
+        $input['image'] = $safeName;
+
+        $respons = Show::create([
+            'title' => $input['title'],
+            'slug' => $input['slug'],
+            'score' => $input['score'],
+            'genre_id' => $genre,
+            'image' => $input['image'],
+        ]);
+
+        // dd($respons);
+
+        if ($respons) {
+            return redirect()->back()
+                ->with('success', 'Data Berhasil Ditambah');
+        }
+        return redirect('/dashboard/create')
+            ->with('error', 'Data Tidak Berhasil Ditambah');
     }
 
     /**
@@ -45,9 +90,14 @@ class ShowController extends Controller
      * @param  \App\Models\Show  $show
      * @return \Illuminate\Http\Response
      */
-    public function show(Show $show)
+    public function show_anime(Show $show)
     {
-        //
+        $data = Show::all();
+        $genre = Genre::all();
+
+        // dd($genre);
+        // dd($data);
+        return view('dashboard.show', compact('data', 'genre'));
     }
 
     /**
@@ -70,7 +120,6 @@ class ShowController extends Controller
      */
     public function update(UpdateShowRequest $request, Show $show)
     {
-        //
     }
 
     /**
