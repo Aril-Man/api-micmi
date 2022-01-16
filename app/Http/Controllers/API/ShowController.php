@@ -23,8 +23,6 @@ class ShowController extends Controller
         return response()->json([ShowResource::collection($data)]);
     }
 
-
-
     /**
      * Display the specified resource.
      *
@@ -34,6 +32,10 @@ class ShowController extends Controller
     public function show($id)
     {
         $data = Show::find($id);
+
+        if ($data == null) {
+            return response()->json(['Data tidak ditemukan.']);
+        }
 
         return response()->json([new ShowResource($data)]);
     }
