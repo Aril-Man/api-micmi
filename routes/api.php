@@ -21,15 +21,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Show
+// Anime
 Route::get('/show', [ShowController::class, 'index']);
 Route::get('/show/{id}', [ShowController::class, 'show']);
-Route::put('/show/{id}', [ShowController::class, 'update']);
+Route::patch('/show/{id}', [ShowController::class, 'update']);
 Route::delete('/show/{id}', [ShowController::class, 'destroy']);
 
 // Genre
 Route::get('/genre', [GenreController::class, 'index']);
 Route::get('/genre/{id}', [GenreController::class, 'show']);
 Route::post('/genre', [GenreController::class, 'store']);
-Route::put('/genre/{id}', [GenreController::class, 'update']);
+Route::patch('/genre/{id}', [GenreController::class, 'update']);
 Route::delete('/genre/{id}', [GenreController::class, 'destroy']);
