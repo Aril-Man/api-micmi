@@ -9,7 +9,7 @@ class Show extends Model
 {
     use HasFactory;
     protected $primarykey = 'id';
-    protected $table = 'tbl_anime';
+    protected $table = 'tbl_show';
     protected $fillable = [
         'title',
         'slug',
