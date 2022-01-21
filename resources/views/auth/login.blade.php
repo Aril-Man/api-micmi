@@ -1,7 +1,7 @@
 
 @extends('layouts.auth')
 
-@section('title', 'Login')
+@section('title', 'Login | MICMI')
 @section('content')
 <body class="bg-gradient-primary">
     <div class="container">
