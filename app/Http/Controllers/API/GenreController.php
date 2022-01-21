@@ -71,7 +71,6 @@ class GenreController extends Controller
     {
         $data = Genre::find($id);
         $data->genre = $request->genre;
-
         $data->save();
 
         return response()->json([new GenreResource($data), 'Data Berhasil Update']);

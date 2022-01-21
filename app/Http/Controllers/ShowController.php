@@ -61,7 +61,7 @@ class ShowController extends Controller
         $file = $request->file('image');
         $extension = $file->getClientOriginalExtension();
         $folderName = 'cover_image/';
-        $destinationPath = public_path() . $folderName;
+        $destinationPath = $folderName;
         $safeName = Str::random(10) . '.' . $extension;
         $file->move($destinationPath, $safeName);
         $input['image'] = $safeName;

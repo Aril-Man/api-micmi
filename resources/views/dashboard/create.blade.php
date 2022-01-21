@@ -36,11 +36,11 @@
                     @csrf
                     <div class="form-group">
                         <label for="title" class="font-weight-bold">Title</label>
-                        <input name="title" type="text" class="form-control">
+                        <input name="title" type="text" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="score" class="font-weight-bold">Score</label>
-                        <input name="score" type="number" class="form-control">
+                        <input name="score" type="number" class="form-control" required>
                     </div>
                     <div class="form-group ">
                         <label for="genre_id" class="font-weight-bold">Genre</label>
@@ -48,7 +48,7 @@
                             <div class="form-check ">
                                 <label class="form-check-labe d-inline-flex">
                                     <input class="form-check-input" value="{{ $g->genre }}" type="checkbox"
-                                        name="genre_id[]" id="genre_id">
+                                        name="genre_id[]" id="genre_id" required>
                                     {{ $g->genre }}
                                 </label>
                             </div>

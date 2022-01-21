@@ -22,10 +22,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // Anime
-Route::get('/show', [ShowController::class, 'index']);
-Route::get('/show/{id}', [ShowController::class, 'show']);
-Route::patch('/show/{id}', [ShowController::class, 'update']);
-Route::delete('/show/{id}', [ShowController::class, 'destroy']);
+Route::get('/anime', [ShowController::class, 'index']);
+Route::get('/anime/{id}', [ShowController::class, 'show']);
+Route::patch('/anime/{id}', [ShowController::class, 'update']);
+Route::delete('/anime/{id}', [ShowController::class, 'destroy']);
 
 // Genre
 Route::get('/genre', [GenreController::class, 'index']);
@@ -33,3 +33,5 @@ Route::get('/genre/{id}', [GenreController::class, 'show']);
 Route::post('/genre', [GenreController::class, 'store']);
 Route::patch('/genre/{id}', [GenreController::class, 'update']);
 Route::delete('/genre/{id}', [GenreController::class, 'destroy']);
+
+// Episode
