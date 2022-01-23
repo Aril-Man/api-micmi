@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\LoginResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,6 +11,7 @@ class LoginController extends Controller
 
     public function index()
     {
+
         Auth::viaRemember();
         if (Auth::check()) {
             return redirect()->intended('dashboard');
@@ -33,7 +35,7 @@ class LoginController extends Controller
                 ->withSuccess('Signed in');
         }
 
-        return redirect('auth.login')->withSuccess('Login details are not valid');
+        return redirect()->back()->with('error', 'Login details are not valid');
     }
 
 

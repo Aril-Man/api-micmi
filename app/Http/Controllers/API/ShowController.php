@@ -29,9 +29,11 @@ class ShowController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $data = Show::find($id);
+        $data = Show::where('slug', $slug)->first();
+
+        // dd($data);
 
         if ($data == null) {
             return response()->json(['Data tidak ditemukan.']);
@@ -47,9 +49,9 @@ class ShowController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
-        $data = Show::find($id);
+        $data = Show::where('slug', $slug)->first();
         $data->title = $request->title;
         $data->slug = $request->slug;
         $data->score = $request->score;
@@ -65,9 +67,9 @@ class ShowController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($slug)
     {
-        $data = Show::find($id);
+        $data = Show::where('slug', $slug)->first();
         $data->delete();
 
         return response()->json([new ShowResource($data), 'Data terhapus']);
