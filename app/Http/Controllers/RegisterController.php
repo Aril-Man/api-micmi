@@ -30,6 +30,6 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password'])
         ]);
 
-        return redirect("dashboard")->withSuccess('You have signed-in');
+        return redirect("login")->with('sucsess', 'You have signed-in');
     }
 }

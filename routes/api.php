@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\ShowController;
+use App\Http\Controllers\LoginController;
+use Illuminate\Auth\Events\Login;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +25,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Anime
 Route::get('/anime', [ShowController::class, 'index']);
-Route::get('/anime/{id}', [ShowController::class, 'show']);
-Route::patch('/anime/{id}', [ShowController::class, 'update']);
-Route::delete('/anime/{id}', [ShowController::class, 'destroy']);
+Route::get('/anime/{slug}', [ShowController::class, 'show']);
+Route::patch('/anime/{slug}', [ShowController::class, 'update']);
+Route::delete('/anime/{slug}', [ShowController::class, 'destroy']);
 
 // Genre
 Route::get('/genre', [GenreController::class, 'index']);
