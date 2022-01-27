@@ -25,7 +25,7 @@
                                         </div>
                                     @endif
                                     @if (Session::get('sucsess'))
-                                        <div class="alert alert-suscess alert-dismissible fade show" role="alert">
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
                                             <strong>{{ Session::get('sucsess') }}</strong>
                                             <button type="button" class="close" data-dismiss="alert"
                                                 aria-label="Close">
