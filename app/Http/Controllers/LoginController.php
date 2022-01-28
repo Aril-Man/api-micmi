@@ -32,7 +32,7 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials, $remember)) {
             return redirect()->intended('dashboard')
-                ->withSuccess('Signed in');
+                ->with('success', 'Signed in');
         }
 
         return redirect()->back()->with('error', 'Login details are not valid');

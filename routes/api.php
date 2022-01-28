@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\ShowController;
+use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Auth\Events\Login;
 
@@ -22,6 +23,11 @@ use Illuminate\Auth\Events\Login;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// User
+Route::get('/user', [UserController::class, 'index']);
+Route::get('/user/{id}', [UserController::class, 'show']);
+Route::delete('/user/{id}', [UserController::class, 'destroy']);
 
 // Anime
 Route::get('/anime', [ShowController::class, 'index']);

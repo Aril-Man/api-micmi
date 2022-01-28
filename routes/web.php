@@ -27,7 +27,7 @@ Route::get('login', [LoginController::class, 'index'])->name('login')->middlewar
 Route::post('login', [LoginController::class, 'customLogin'])->name('login.custom');
 Route::get('signout', [LoginController::class, 'signOut'])->name('signout');
 
-Route::get('register', [RegisterController::class, 'index'])->name('register-user');
+Route::get('register', [RegisterController::class, 'index'])->name('register-user')->middleware('guest');
 Route::post('register', [RegisterController::class, 'customRegistration'])->name('register.custom');
 
 Route::get('dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
