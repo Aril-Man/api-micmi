@@ -18,7 +18,9 @@ class UserController extends Controller
     {
         $data = User::all();
 
-        return response()->json(UserResource::collection($data));
+        return response()->json([
+            'data' => UserResource::collection($data)
+        ]);
     }
 
     public function show($id)
@@ -26,9 +28,13 @@ class UserController extends Controller
         $data = User::find($id);
 
         if ($data) {
-            return response()->json([new UserResource($data)]);
+            return response()->json([
+                'data' => new UserResource($data)
+            ]);
         }
-        return response()->json('User tidak ditemukan');
+        return response()->json([
+            'message' => 'User not found'
+        ], 404);
     }
 
 
@@ -38,6 +44,8 @@ class UserController extends Controller
 
         $data->delete();
 
-        return response()->json('Data berhasil di hapus');
+        return response()->json([
+            'message' => 'Successfully deleted user'
+        ], 200);
     }
 }

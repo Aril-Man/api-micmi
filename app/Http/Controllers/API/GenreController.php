@@ -18,7 +18,13 @@ class GenreController extends Controller
     {
         $data = Genre::all();
 
-        return response()->json([GenreResource::collection($data)]);
+        return response()->json([
+            'data' => GenreResource::collection($data)
+        ]);
+
+        // return response()->json([
+        //     'data' => GenreResource::collection($data)
+        // ]);
     }
 
     /**
@@ -41,7 +47,10 @@ class GenreController extends Controller
             'genre' => $input['genre'],
         ]);
 
-        return response()->json([new GenreResource($respons), 'Data berhasil di input.']);
+        return response()->json([
+            'message' => 'Successfully created genre!',
+            'data' => new GenreResource($respons)
+        ]);
     }
 
     /**
@@ -55,9 +64,13 @@ class GenreController extends Controller
         $data = Genre::find($id);
 
         if ($data == null) {
-            return response()->json(['Data tidak di temukan.']);
+            return response()->json([
+                'message' => 'Data tidak ditemukan.'
+            ], 404);
         }
-        return response()->json([new GenreResource($data)]);
+        return response()->json([
+            'data' => new GenreResource($data)
+        ]);
     }
 
     /**
@@ -73,7 +86,10 @@ class GenreController extends Controller
         $data->genre = $request->genre;
         $data->save();
 
-        return response()->json([new GenreResource($data), 'Data Berhasil Update']);
+        return response()->json([
+            'message' => 'Data Berhasil Update',
+            'data' => new GenreResource($data)
+        ]);
     }
 
     /**
@@ -88,6 +104,8 @@ class GenreController extends Controller
 
         $data->delete();
 
-        return response()->json([new GenreResource($data), 'Data berhasi Di hapus']);
+        return response()->json([
+            'message' => 'Data berhasil terhapus!'
+        ], 200);
     }
 }

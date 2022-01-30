@@ -20,7 +20,9 @@ class ShowController extends Controller
     {
         $data = Show::all();
 
-        return response()->json([ShowResource::collection($data)]);
+        return response()->json([
+            'data' => ShowResource::collection($data)
+        ]);
     }
 
     /**
@@ -36,10 +38,14 @@ class ShowController extends Controller
         // dd($data);
 
         if ($data == null) {
-            return response()->json(['Data tidak ditemukan.']);
+            return response()->json([
+                'message' => 'Show not found'
+            ], 404);
         }
 
-        return response()->json([new ShowResource($data)]);
+        return response()->json([
+            'data' => new ShowResource($data)
+        ]);
     }
 
     /**
@@ -58,7 +64,10 @@ class ShowController extends Controller
 
         $data->save();
 
-        return response()->json([new ShowResource($data), 'Data Berhasil Update']);
+        return response()->json([
+            'message' => 'Show updated successfully',
+            'data' => new ShowResource($data)
+        ]);
     }
 
     /**
@@ -72,6 +81,8 @@ class ShowController extends Controller
         $data = Show::where('slug', $slug)->first();
         $data->delete();
 
-        return response()->json([new ShowResource($data), 'Data terhapus']);
+        return response()->json([
+            'message' => 'Anime deleted successfully'
+        ], 200);
     }
 }
