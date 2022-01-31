@@ -18,11 +18,32 @@ class ShowController extends Controller
      */
     public function index()
     {
-        $data = Show::all();
+        //CONTOH PAGINATE (MENAMPILKAN 2 data saja)
+        $data = Show::paginate(2);
+        // $data = Show::all();
+        // return response()->json(ShowResource::collection($data));
 
         return response()->json([
-            'data' => ShowResource::collection($data)
+            'status' => 'success', //memberikan status
+            'message' => 'fetched successfully', //memberikan pesan
+            'data' => [ //menampilkan data
+                'total' =>$data->count(),
+                'per_page' => $data->perPage(),
+                "current_page" => $data->currentPage(),
+                "last_page" => $data->lastPage(),
+                "next_page_url" => $data->nextPageUrl() ?? '' ,
+                "prev_page_url" => $data->previousPageUrl() ?? '',
+                'animes' => $data->items()
+            ],
         ]);
+
+        if(!$data){
+            return response()->json([
+                'status' => 'success', //memberikan status
+                'message' => 'no data found', //memberikan pesan
+                'data' => [],
+            ]);
+        }
     }
 
     /**
