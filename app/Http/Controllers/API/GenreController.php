@@ -16,10 +16,16 @@ class GenreController extends Controller
      */
     public function index()
     {
-        $data = Genre::all();
+        $data = Genre::paginate();
 
         return response()->json([
-            'data' => GenreResource::collection($data)
+            'status' => 'success',
+            'message' => 'fetched successfully',
+            'data' => [
+                'total' => $data->count(),
+                'per_page' => $data->perPage(),
+                'genres' => $data->items()
+            ],
         ]);
 
         // return response()->json([
@@ -88,6 +94,7 @@ class GenreController extends Controller
 
         return response()->json([
             'message' => 'Data Berhasil Update',
+            'status' => 'success',
             'data' => new GenreResource($data)
         ]);
     }
@@ -105,7 +112,8 @@ class GenreController extends Controller
         $data->delete();
 
         return response()->json([
-            'message' => 'Data berhasil terhapus!'
-        ], 200);
+            'status' => 'success',
+            'message' => 'Data Berhasil Dihapus'
+        ]);
     }
 }

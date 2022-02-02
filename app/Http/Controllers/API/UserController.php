@@ -16,10 +16,18 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data = User::all();
+        $data = User::paginate();
 
         return response()->json([
-            'data' => UserResource::collection($data)
+            'status' => 'success',
+            'message' => 'fetched successfully',
+            'data' => [
+                'total' => $data->count(),
+                'per_page' => $data->perPage(),
+                "current_page" => $data->currentPage(),
+                "last_page" => $data->lastPage(),
+                'users' => $data->items()
+            ],
         ]);
     }
 
