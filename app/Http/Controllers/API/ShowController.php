@@ -19,7 +19,7 @@ class ShowController extends Controller
     public function index()
     {
         //CONTOH PAGINATE (MENAMPILKAN 2 data saja)
-        $data = Show::paginate(2);
+        $data = Show::paginate();
         // $data = Show::all();
         // return response()->json(ShowResource::collection($data));
 
@@ -27,20 +27,16 @@ class ShowController extends Controller
             'status' => 'success', //memberikan status
             'message' => 'fetched successfully', //memberikan pesan
             'data' => [ //menampilkan data
-                'total' =>$data->count(),
+                'total' => $data->count(),
                 'per_page' => $data->perPage(),
-                "current_page" => $data->currentPage(),
-                "last_page" => $data->lastPage(),
-                "next_page_url" => $data->nextPageUrl() ?? '' ,
-                "prev_page_url" => $data->previousPageUrl() ?? '',
                 'animes' => $data->items()
             ],
         ]);
 
-        if(!$data){
+        if (!$data) {
             return response()->json([
                 'status' => 'success', //memberikan status
-                'message' => 'no data found', //memberikan pesan
+                'message' => 'No data found', //memberikan pesan
                 'data' => [],
             ]);
         }
@@ -52,9 +48,9 @@ class ShowController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($slug, Show $anime)
     {
-        $data = Show::where('slug', $slug)->first();
+        $data = $anime->get_slug($slug);
 
         // dd($data);
 
@@ -76,9 +72,9 @@ class ShowController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $slug)
+    public function update(Request $request, Show $anime, $slug)
     {
-        $data = Show::where('slug', $slug)->first();
+        $data = $anime->get_slug($slug);
         $data->title = $request->title;
         $data->slug = $request->slug;
         $data->score = $request->score;
@@ -97,9 +93,9 @@ class ShowController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($slug)
+    public function destroy(Show $anime, $id)
     {
-        $data = Show::where('slug', $slug)->first();
+        $data = $anime->get_id($id);
         $data->delete();
 
         return response()->json([

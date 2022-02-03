@@ -16,10 +16,16 @@ class GenreController extends Controller
      */
     public function index()
     {
-        $data = Genre::all();
+        $data = Genre::paginate();
 
         return response()->json([
-            'data' => GenreResource::collection($data)
+            'status' => 'success',
+            'message' => 'fetched successfully',
+            'data' => [
+                'total' => $data->count(),
+                'per_page' => $data->perPage(),
+                'genres' => $data->items()
+            ],
         ]);
 
         // return response()->json([
@@ -59,9 +65,9 @@ class GenreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Genre $genre, $id)
     {
-        $data = Genre::find($id);
+        $data = $genre->get_id($id);
 
         if ($data == null) {
             return response()->json([
@@ -80,14 +86,15 @@ class GenreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Genre $genre, $id)
     {
-        $data = Genre::find($id);
+        $data = $genre->get_id($id);
         $data->genre = $request->genre;
         $data->save();
 
         return response()->json([
             'message' => 'Data Berhasil Update',
+            'status' => 'success',
             'data' => new GenreResource($data)
         ]);
     }
@@ -98,14 +105,15 @@ class GenreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Genre $genre, $id)
     {
-        $data = Genre::find($id);
+        $data = $genre->get_id($id);
 
         $data->delete();
 
         return response()->json([
-            'message' => 'Data berhasil terhapus!'
-        ], 200);
+            'status' => 'success',
+            'message' => 'Data Berhasil Dihapus'
+        ]);
     }
 }

@@ -22,46 +22,46 @@
     <h1 class="h3 mb-3 text-gray-800">Create Anime</h1>
 
     <!-- Content Row -->
-        <div class="card shadow mb-4">
-            <!-- Card Header - Dropdown -->
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Create Anime</h6>
-                <div class="dropdown no-arrow">
-                </div>
-            </div>
-            <!-- Card Body -->
-            <div class="card-body">
-                <form method="POST" action="/dashboard/create" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group">
-                        <label for="title" class="font-weight-bold">Title</label>
-                        <input name="title" type="text" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="score" class="font-weight-bold">Score</label>
-                        <input name="score" type="number" class="form-control" required>
-                    </div>
-                    <div class="form-group ">
-                        <label for="genre_id" class="font-weight-bold">Genre</label>
-                        @foreach ($genre as $g)
-                            <div class="form-check ">
-                                <label class="form-check-labe d-inline-flex">
-                                    <input class="form-check-input" value="{{ $g->genre }}" type="checkbox"
-                                        name="genre_id[]" id="genre_id" required>
-                                    {{ $g->genre }}
-                                </label>
-                            </div>
-                        @endforeach
-                    </div>
-                    <div class="form-group">
-                        <label for="image" class="font-weight-bold">Image</label>
-                        <input name="image" type="file" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
+    <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Create Anime</h6>
+            <div class="dropdown no-arrow">
             </div>
         </div>
+        <!-- Card Body -->
+        <div class="card-body">
+            <form method="POST" action="/dashboard/create" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group">
+                    <label for="title" class="font-weight-bold">Title</label>
+                    <input name="title" type="text" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="score" class="font-weight-bold">Score</label>
+                    <input name="score" type="number" class="form-control" required>
+                </div>
+                <div class="form-group ">
+                    <label for="genre_id" class="font-weight-bold">Genre</label>
+                    @foreach ($genre as $g)
+                        <div class="form-check ">
+                            <label class="form-check-labe d-inline-flex">
+                                <input class="form-check-input" value="{{ $g->genre }}" type="checkbox"
+                                    name="genre_id[]" id="genre_id">
+                                {{ $g->genre }}
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="form-group">
+                    <label for="image" class="font-weight-bold">Image</label>
+                    <input name="image" type="file" class="form-control">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
 @endsection
