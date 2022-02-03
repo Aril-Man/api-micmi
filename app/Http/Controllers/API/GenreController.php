@@ -65,9 +65,9 @@ class GenreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Genre $genre, $id)
     {
-        $data = Genre::find($id);
+        $data = $genre->get_id($id);
 
         if ($data == null) {
             return response()->json([
@@ -86,9 +86,9 @@ class GenreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Genre $genre, $id)
     {
-        $data = Genre::find($id);
+        $data = $genre->get_id($id);
         $data->genre = $request->genre;
         $data->save();
 
@@ -105,9 +105,9 @@ class GenreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Genre $genre, $id)
     {
-        $data = Genre::find($id);
+        $data = $genre->get_id($id);
 
         $data->delete();
 

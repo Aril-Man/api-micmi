@@ -13,4 +13,11 @@ class Genre extends Model
     protected $fillable = [
         'genre'
     ];
+
+
+    public function get_id($id)
+    {
+        $data = Genre::where('id', $id)->first();
+        return $data;
+    }
 }
